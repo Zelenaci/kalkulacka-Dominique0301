@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-# Soubor:  kalkulacka.py
-# Datum:   28.03.2022 08:31
-# Autor:   Marek Nožka, nozka <@t> spseol <d.t> cz
-############################################################################
 import math
 from importlib.metadata import PathDistribution
 from os.path import basename, splitext
@@ -114,3 +109,7 @@ class Application(tk.Tk):
 
     def ctu(self, token):
         a = self.vstup.get()
+
+app = Application()
+app.mainloop()
+
