@@ -8,12 +8,12 @@ from importlib.metadata import PathDistribution
 from os.path import basename, splitext
 import tkinter as tk
 from tkinter import messagebox, IntVar
-from tkinter.messagebox import 
+from tkinter.messagebox import showerror
 
 
 class Application(tk.Tk):
     name = basename(splitext(basename(__file__.capitalize()))[0])
-    name = "grafy"
+    name = "Kalkulačka"
     
     
     
@@ -24,6 +24,9 @@ class Application(tk.Tk):
         self.title(self.name)
         self.bind("<Escape>", self.quit)
         self.geometry("400x400")
+
+        self.vstup =tk.Entry(self)
+        self.vstup.grid(row=1,column=1)
 
         self.dva_operandy = {}
         self.dva_operandy["+"] = lambda a, b: a + b
@@ -92,13 +95,13 @@ class Application(tk.Tk):
                 a = self.zasobnik.pop()
                 self.zasobnik.append(self.dva_operandy[token](a, b))
             else:
-                print("Nemám dost operandů!!!")
+                messagebox.showerror("Chyba", "Počet operandů je nedostačující.")
         if token in self.jeden_operand.keys():
             if len(self.zasobnik) >= 1:
                 a = self.zasobnik.pop()
                 self.zasobnik.append(self.jeden_operand[token](a))
             else:
-                print("Nemám dost operandů!!!")
+                messagebox.showerror("Chyba", "Počet operandů je nedostačující.")
 
 
     def zpracuj(self,radek):
@@ -109,9 +112,5 @@ class Application(tk.Tk):
             except ValueError:
                 self.operace(token)
 
-
-    # čtu vstup
-    while True:
-        pass
-        #radek = input(self.zasobnik.__repr__() + ">>> ")
-        #zpracuj(radek)
+    def ctu(self, token):
+        a = self.vstup.get()
